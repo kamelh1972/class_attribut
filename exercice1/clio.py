@@ -11,18 +11,22 @@ class Clio():
         "white" : 125452
         }
     def __init__(self, number_doors, color, color_number):
-        self.__number_doors = number_doors
-        self.__color = color
-        self.__color_number = color_number
+        self.number_doors = number_doors
+        self.color = color
+        self.color_number = color_number
+
+    """methode decorateur qui appel la methode getter"""
     @property
     def number_doors(self):
         return self.__number_doors
+    """ @=decorateur methode qui fait appel a la methode setter"""
     @number_doors.setter
     def number_doors(self, number_doors) :
         if number_doors in Clio.doors :
             self.__number_doors = number_doors
         else :
-            raise ValueError
+            raise ValueError("la clio n'existe qu'en 5 ou 3 portes")
+    """ methode qui leve une exception si le getter n est pas bon"""
     @property
     def color_number(self):
         return self.__color_number
@@ -31,20 +35,20 @@ class Clio():
         if color_number in Clio.colors.value() :
             self.__color_number = color_number
         else :
-            raise ValueError
+            raise ValueError("la couleur n'existe pas")
 
     @property
     def color(self):
         return self.__color
     @color.setter
     def color(self, color) :
-        if color in Clio.colors.key() :
+        if color in Clio.colors.keys() :
             self.__color = color
         else :
-            raise ValueError
+            raise ValueError("la couleurs n'existe pas")
     @classmethod
     def checkprice(cls):
         if cls.price in range (8000, 30000):
             return cls.price
         else :
-            raise ValueError
+            raise ValueError("le prix de la clio doit se situer entre 8000 et 30000")
